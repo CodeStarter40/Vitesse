@@ -1,4 +1,4 @@
-package com.openclassrooms.vitesse
+package com.openclassrooms.vitesse.ui.homefragment
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
