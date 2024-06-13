@@ -15,7 +15,7 @@ interface CandidatDtoDao {
     @Query("SELECT * FROM candidat")
     fun getAllCandidat(): Flow<List<CandidatDto>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun insertCandidat(candidat: CandidatDto)
 
     @Update
@@ -26,6 +26,10 @@ interface CandidatDtoDao {
 
     @Query("DELETE FROM candidat WHERE id = :candidatId")
     suspend fun deleteCandidatById(candidatId: Int)
+
+    @Query("DELETE FROM candidat")
+    suspend fun deleteAllCandidat()
+
 
 
 

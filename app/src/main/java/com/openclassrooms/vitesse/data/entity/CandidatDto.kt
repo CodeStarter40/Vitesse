@@ -19,7 +19,7 @@ data class CandidatDto (
     val prenom: String,
 
     @ColumnInfo(name = "dateBirth")
-    val dateBirth: Date,
+    val dateBirth: String,
 
     @ColumnInfo(name = "picture")
     val picture: String,

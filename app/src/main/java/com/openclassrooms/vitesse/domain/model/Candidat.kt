@@ -1,6 +1,5 @@
 package com.openclassrooms.vitesse.domain.model
 
-import org.w3c.dom.Text
 import java.util.Date
 
 data class Candidat(
@@ -11,7 +10,7 @@ data class Candidat(
     val phone: String,
     val email: String,
     val picture: String,
-    val dateBirth: Date,
+    val dateBirth: String,
     val pretend:Double,
     val favori: Boolean,
     val note:String

@@ -53,6 +53,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.appcompat)
     val room_version = "2.6.1"
 
     implementation(libs.androidx.core.ktx)
@@ -74,6 +75,7 @@ dependencies {
     //imp DB
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
     //imp coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
