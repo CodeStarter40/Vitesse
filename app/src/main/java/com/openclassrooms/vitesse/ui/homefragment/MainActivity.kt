@@ -1,12 +1,15 @@
 package com.openclassrooms.vitesse.ui.homefragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.data.database.AppDatabase
 import dagger.hilt.android.AndroidEntryPoint
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -14,7 +17,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //init db with activity scope
-        AppDatabase.getDatabase(this,lifecycleScope)
+        Log.d("MAINACTIVITY", "onCreate called")
+
+        val db = AppDatabase.getDatabase(this, lifecycleScope)
+        //Init the database with the activity scope
+
+        GlobalScope.launch { getCandidat(db) }
+    }
+    suspend fun getCandidat(db: AppDatabase){
+        db.candidatDao().getAllCandidat().collect{
+            Log.d("MAINACTIVITY", "getCandidat called")
+        }
     }
 }

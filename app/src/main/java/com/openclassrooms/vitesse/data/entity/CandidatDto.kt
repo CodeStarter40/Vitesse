@@ -3,41 +3,40 @@ package com.openclassrooms.vitesse.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.security.KeyStore.TrustedCertificateEntry
 import java.util.Date
 
 @Entity(tableName = "candidat")
 data class CandidatDto (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Long = 0,
+    var id: Long = 0,
 
     @ColumnInfo(name = "nom")
-    val nom: String,
+    var nom: String,
 
     @ColumnInfo(name = "prenom")
-    val prenom: String,
+    var prenom: String,
 
     @ColumnInfo(name = "dateBirth")
-    val dateBirth: String,
+    var dateBirth: String,
 
     @ColumnInfo(name = "picture")
-    val picture: String,
+    var picture: String,
 
     @ColumnInfo(name = "email")
-    val email:String,
+    var email:String,
 
     @ColumnInfo(name = "note")
-    val note:String,
+    var note:String,
 
     @ColumnInfo(name = "pretend")
-    val pretend:Double,
+    var pretend:Double,
 
     @ColumnInfo(name = "favori")
-    val favori:Boolean,
+    var favori:Boolean,
 
     @ColumnInfo(name = "phone")
-    val phone:String,
+    var phone:String,
 
 )
 
