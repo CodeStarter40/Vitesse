@@ -54,6 +54,9 @@ android {
 dependencies {
 
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.cardview)
     val room_version = "2.6.1"
 
     implementation(libs.androidx.core.ktx)

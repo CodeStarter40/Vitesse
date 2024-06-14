@@ -15,12 +15,12 @@ class CandidatsRepository @Inject constructor(private val candidatDao: CandidatD
         return candidatDao.getAllCandidat()
     }
 
-
     //add candidat
     suspend fun addCandidat(candidat: Candidat) {
         candidatDao.insertCandidat(candidat.toDto())
     }
 
+    //delete candidatbyId
     suspend fun deleteCandidatById(id: Long){
         candidatDao.deleteCandidatById(id)
     }
