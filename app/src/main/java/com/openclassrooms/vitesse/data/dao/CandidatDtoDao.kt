@@ -3,7 +3,6 @@ package com.openclassrooms.vitesse.data.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.openclassrooms.vitesse.data.entity.CandidatDto
@@ -25,7 +24,7 @@ interface CandidatDtoDao {
     suspend fun deleteCandidat(candidat: CandidatDto)
 
     @Query("DELETE FROM candidat WHERE id = :candidatId")
-    suspend fun deleteCandidatById(candidatId: Int)
+    suspend fun deleteCandidatById(candidatId: Long)
 
     @Query("DELETE FROM candidat")
     suspend fun deleteAllCandidat()

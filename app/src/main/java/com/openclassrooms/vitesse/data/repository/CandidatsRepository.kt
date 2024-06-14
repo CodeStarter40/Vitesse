@@ -5,9 +5,15 @@ import com.openclassrooms.vitesse.data.dao.CandidatDtoDao
 import com.openclassrooms.vitesse.data.entity.CandidatDto
 import com.openclassrooms.vitesse.domain.model.Candidat
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CandidatsRepository(private val candidatDao: CandidatDtoDao) {
-    fun getAllCandidats(): Flow<List<CandidatDto>> = candidatDao.getAllCandidat()
+
+@Singleton
+class CandidatsRepository @Inject constructor(private val candidatDao: CandidatDtoDao) {
+    fun getAllCandidats(): Flow<List<CandidatDto>> {
+        return candidatDao.getAllCandidat()
+    }
 
 
     //add candidat
@@ -15,4 +21,7 @@ class CandidatsRepository(private val candidatDao: CandidatDtoDao) {
         candidatDao.insertCandidat(candidat.toDto())
     }
 
+    suspend fun deleteCandidatById(id: Long){
+        candidatDao.deleteCandidatById(id)
+    }
 }
