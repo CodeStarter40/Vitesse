@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.openclassrooms.vitesse"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -57,6 +57,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.cardview)
+    implementation(libs.car.ui.lib)
+    implementation (libs.material)
+    implementation (libs.car.ui.lib)
+
     val room_version = "2.6.1"
 
     implementation(libs.androidx.core.ktx)
