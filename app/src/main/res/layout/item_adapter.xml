@@ -20,16 +20,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6" />
-
-        <TextView
-            android:id="@+id/item_card_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Nom"
-            app:layout_constraintStart_toEndOf="@+id/item_card_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintVertical_bias="0.6"
+            android:src="@drawable/male71" />
 
         <TextView
             android:id="@+id/item_card_prenom"
@@ -37,7 +29,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Prenom"
-            app:layout_constraintStart_toEndOf="@+id/item_card_name"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/item_card_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_card_nom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Nom"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/item_card_prenom"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
