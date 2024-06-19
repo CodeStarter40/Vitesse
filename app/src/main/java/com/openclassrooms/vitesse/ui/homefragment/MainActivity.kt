@@ -9,11 +9,19 @@ import com.openclassrooms.vitesse.data.database.AppDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import androidx.activity.viewModels
+import com.openclassrooms.vitesse.databinding.ActivityMainBinding
+import com.openclassrooms.vitesse.ui.candidat.CandidatsViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: CandidatsViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
         Log.d("MAINACTIVITY", "onCreate called")

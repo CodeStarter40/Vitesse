@@ -22,6 +22,10 @@ android {
         }
     }
 
+    viewBinding {
+        enable = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -91,6 +95,9 @@ dependencies {
     //imp hilt
     implementation("com.google.dagger:hilt-android:2.51")
     kapt("com.google.dagger:hilt-android-compiler:2.51")
+    //imp hilt view model
+    implementation (libs.androidx.hilt.lifecycle.viewmodel)
+    kapt (libs.androidx.hilt.compiler)
 
     //imp Cycle de vie
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")

@@ -15,7 +15,7 @@
         tools:ignore="MissingConstraints" />
 
     <SearchView
-        android:id="@+id/Search_View"
+        android:id="@+id/search_View"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="4dp"
@@ -27,13 +27,13 @@
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/Tab_Layout"
+        android:id="@+id/tab_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Search_View"
+        app:layout_constraintTop_toBottomOf="@+id/search_View"
         app:tabTextColor="@color/colorPrimaryVariant">
 
 
@@ -44,7 +44,7 @@
             android:text="Tous" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/favoristab"
+            android:id="@+id/tab_favoris"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favoris" />
