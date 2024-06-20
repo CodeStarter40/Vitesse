@@ -53,6 +53,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
 dependencies {
@@ -96,11 +97,14 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51")
     kapt("com.google.dagger:hilt-android-compiler:2.51")
     //imp hilt view model
-    implementation (libs.androidx.hilt.lifecycle.viewmodel)
-    kapt (libs.androidx.hilt.compiler)
+    //implementation (libs.androidx.hilt.lifecycle.viewmodel)
 
     //imp Cycle de vie
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
     implementation("androidx.fragment:fragment-ktx:1.8.0")
 
+}
+
+kapt {
+    correctErrorTypes = true
 }

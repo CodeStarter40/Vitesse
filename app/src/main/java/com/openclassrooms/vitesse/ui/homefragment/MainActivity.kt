@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import androidx.activity.viewModels
+import com.android.car.ui.toolbar.TabLayout
 import com.openclassrooms.vitesse.databinding.ActivityMainBinding
 import com.openclassrooms.vitesse.ui.candidat.CandidatsViewModel
 
@@ -21,7 +22,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
         Log.d("MAINACTIVITY", "onCreate called")
@@ -31,6 +31,8 @@ class MainActivity : ComponentActivity() {
 
         GlobalScope.launch { getCandidat(db) }
     }
+
+
     suspend fun getCandidat(db: AppDatabase){
         db.candidatDao().getAllCandidat().collect{
             Log.d("MAINACTIVITY", "getCandidat called")

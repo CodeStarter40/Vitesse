@@ -10,12 +10,19 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+
+    @Provides
+    fun provideCoroutineScope(): CoroutineScope {
+        return CoroutineScope(Dispatchers.Default)
+    }
 
     //fournit une instance de la base de données
     @Provides
@@ -37,5 +44,6 @@ class AppModule {
     fun provideCandidatsRepository(candidatDao: CandidatDtoDao): CandidatsRepository {
         return CandidatsRepository(candidatDao)
     }
+
 
 }
