@@ -16,21 +16,23 @@ data class Candidat(@JvmField
     var favori: Boolean,
     var note:String
 ){
-    companion object
-    fun fromDto(dto: CandidatDto): Candidat {
-        return Candidat(
-            id = dto.id,
-            nom = dto.nom,
-            prenom = dto.prenom,
-            phone = dto.phone,
-            email = dto.email,
-            picture = dto.picture,
-            dateBirth = dto.dateBirth,
-            pretend = dto.pretend,
-            favori = dto.favori,
-            note = dto.note
-        )
+    companion object {
+        fun fromDto(dto: CandidatDto): Candidat {
+            return Candidat(
+                id = dto.id,
+                nom = dto.nom,
+                prenom = dto.prenom,
+                phone = dto.phone,
+                email = dto.email,
+                picture = dto.picture,
+                dateBirth = dto.dateBirth,
+                pretend = dto.pretend,
+                favori = dto.favori,
+                note = dto.note
+            )
+        }
     }
+
     fun toDto():CandidatDto {
         return CandidatDto(
             id = this.id,

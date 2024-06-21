@@ -23,7 +23,9 @@ class CandidatsViewModel @Inject constructor(private val db: AppDatabase) : View
 
     private fun loadCandidats() {
         viewModelScope.launch {
-            db.candidatDao().getAllCandidat().collect {
+            db.candidatDao().getAllCandidat().collect { candidatsDto ->
+                val candidats = candidatsDto.map { Candidat.fromDto(it) }
+                _candidats.postValue(candidats)
             }
         }
     }
