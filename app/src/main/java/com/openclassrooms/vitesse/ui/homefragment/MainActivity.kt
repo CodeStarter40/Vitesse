@@ -28,6 +28,7 @@ class  MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //exec fun setupTabLayout
         setupTabLayout()
 
         Log.d("MAINACTIVITY", "onCreate called")
@@ -58,6 +59,7 @@ class  MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 Log.d("MAINACTIVITY", "Tab selected: ${tab.position}")
                 when (tab.position) {
+                    //bind pos to fragment
                     0 -> loadFragment(CandidatsFragment())
                 }
             }
@@ -78,7 +80,9 @@ class  MainActivity : AppCompatActivity() {
     private fun loadFragment(fragment: Fragment) {
         Log.d("MAINACTIVITY", "fun loadFragment called on fragment: ${fragment.javaClass.simpleName}")
         supportFragmentManager.beginTransaction()
+            //gate to find error xD
             .replace(R.id.Container_Fragment, fragment)
+            //exec asynch transaction
             .commit()
     }
 

@@ -8,12 +8,6 @@
     android:orientation="vertical">
 
 
-    <FrameLayout
-        android:id="@+id/Container_Fragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:context=".MainActivity"
-        tools:ignore="MissingConstraints" />
 
     <SearchView
         android:id="@+id/search_View"
@@ -40,6 +34,17 @@
 
 
     </com.google.android.material.tabs.TabLayout>
+
+    <FrameLayout
+        android:id="@+id/Container_Fragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        tools:context=".MainActivity"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
