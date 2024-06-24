@@ -45,7 +45,10 @@ class CandidatAdapter : ListAdapter<Candidat, CandidatAdapter.CandidatViewHolder
             prenomTextView.text = candidat.prenom
             nomTextView.text = candidat.nom
             noteTextView.text = candidat.note
-            //add imagesetup after adding the images
+
+            val context = itemView.context
+            val resourceId = context.resources.getIdentifier(candidat.picture, "drawable", context.packageName)
+            imageView.setImageResource(resourceId)
 
         }
     }

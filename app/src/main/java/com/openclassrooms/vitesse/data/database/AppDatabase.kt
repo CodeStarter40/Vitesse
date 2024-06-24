@@ -60,11 +60,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Ben",
                     phone = "1234567890",
                     email = "ben.macke@test.com",
-                    picture = "url_picture_1",
+                    picture = "@drawable/male71",
                     dateBirth = "1986-2-15",
                     pretend = 50000.0,
                     favori = false,
-                    note = "New 1",
+                    note = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
                 )
             )
 
@@ -75,11 +75,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Ben",
                     phone = "1232343214",
                     email = "ben.jacke@test2.com",
-                    picture = "url_picture_2",
+                    picture = "@drawable/male67",
                     dateBirth = "1986-4-15",
                     pretend = 60000.0,
                     favori = true,
-                    note = "New 2",
+                    note = "Nunc dolor quam, placerat et laoreet vitae, porta nec elit. Aenean vitae erat rhoncus, interdum mi ac, sodales odio. Suspendisse tincidunt dignissim lacus ut pretium. Morbi a nisi vehicula, tempus nulla at, varius justo. Mauris consequat nisl vitae erat gravida, sed aliquam ligula iaculis. Sed a ante dolor.",
                 )
             )
 
@@ -90,11 +90,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Jean",
                     phone = "3214321432",
                     email = "jean.dupont@test3.com",
-                    picture = "url_picture_3",
+                    picture = "@drawable/male46",
                     dateBirth = "1990-3-22",
                     pretend = 55000.0,
                     favori = false,
-                    note = "New 3",
+                    note = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum.",
                 )
             )
 
@@ -105,11 +105,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Sophie",
                     phone = "2342342345",
                     email = "sophie.martin@test4.com",
-                    picture = "url_picture_4",
+                    picture = "@drawable/female90",
                     dateBirth = "1987-7-12",
                     pretend = 62000.0,
                     favori = true,
-                    note = "New 4",
+                    note = "Aenean a lectus sed est fringilla mollis. Nam accumsan justo vel lacus pretium rutrum. Suspendisse lobortis dolor bibendum pharetra imperdiet. Ut aliquet augue congue odio pretium faucibus. Sed vulputate aliquam sem, sed vehicula odio tincidunt at. Nunc id vestibulum magna. Aenean quis sodales sapien.",
                 )
             )
 
@@ -120,11 +120,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Pierre",
                     phone = "5436546543",
                     email = "pierre.bernard@test5.com",
-                    picture = "url_picture_5",
+                    picture = "@drawable/male34",
                     dateBirth = "1992-1-20",
                     pretend = 58000.0,
                     favori = false,
-                    note = "New 5",
+                    note = "Donec ut nisl volutpat, interdum risus non, rutrum leo. Pellentesque nunc purus, bibendum in nisl ut, tempus euismod est. Integer augue mi, viverra sit amet ultrices eget, malesuada eget ipsum.",
                 )
             )
 
@@ -135,11 +135,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Marie",
                     phone = "7654321098",
                     email = "marie.dubois@test6.com",
-                    picture = "url_picture_6",
+                    picture = "@drawable/female73",
                     dateBirth = "1985-11-30",
                     pretend = 67000.0,
                     favori = true,
-                    note = "New 6",
+                    note = "Sed nibh justo, mollis vel dapibus id, mollis non nunc. Fusce consectetur justo quis luctus malesuada. Donec pretium viverra varius. Pellentesque eget nunc urna.",
                 )
             )
 
@@ -150,11 +150,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Luc",
                     phone = "9087654321",
                     email = "luc.lefevre@test7.com",
-                    picture = "url_picture_7",
+                    picture = "@drawable/male75",
                     dateBirth = "1983-2-18",
                     pretend = 63000.0,
                     favori = false,
-                    note = "New 7",
+                    note = "Etiam semper eros egestas, faucibus lacus in, tempus ipsum. Cras aliquam vulputate ipsum, ut suscipit ipsum rhoncus et. Nam pulvinar leo vitae massa malesuada, quis dictum dui blandit. Ut nec lorem mi. Praesent in felis convallis, consequat nunc vel, dignissim sapien.",
                 )
             )
 
@@ -165,11 +165,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Julie",
                     phone = "8765432109",
                     email = "julie.moreau@test8.com",
-                    picture = "url_picture_8",
+                    picture = "@drawable/female54",
                     dateBirth = "1989-9-25",
                     pretend = 61000.0,
                     favori = true,
-                    note = "New 8",
+                    note = "Vivamus elit mi, feugiat ut gravida at, convallis ut nibh. Cras quis elit ut eros mattis dapibus. Cras a rutrum augue. Integer felis sem, lacinia in turpis sit amet, ornare molestie dui.",
                 )
             )
 
@@ -180,11 +180,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Paul",
                     phone = "6547890123",
                     email = "paul.laurent@test9.com",
-                    picture = "url_picture_9",
+                    picture = "@drawable/male73",
                     dateBirth = "1991-5-14",
                     pretend = 59000.0,
                     favori = false,
-                    note = "New 9",
+                    note = "Cras aliquam vulputate ipsum, ut suscipit ipsum rhoncus et. Nam pulvinar leo vitae massa malesuada, quis dictum dui blandit. Ut nec lorem mi. Praesent in felis convallis, consequat nunc vel, dignissim sapien. Vivamus elit mi, feugiat ut gravida at, convallis ut nibh.",
                 )
             )
 
@@ -195,11 +195,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Laura",
                     phone = "0987654321",
                     email = "laura.simon@test10.com",
-                    picture = "url_picture_10",
+                    picture = "@drawable/female23",
                     dateBirth = "1984-12-10",
                     pretend = 65000.0,
                     favori = true,
-                    note = "New 10",
+                    note = "Donec mauris est, mattis tempus pretium at, varius vel orci. Fusce finibus augue non purus tempor, ac pharetra lorem vulputate. Nunc sit amet quam quam. Donec a consequat nisl.",
                 )
             )
 
@@ -210,11 +210,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Hugo",
                     phone = "3210987654",
                     email = "hugo.michel@test11.com",
-                    picture = "url_picture_11",
+                    picture = "@drawable/male72",
                     dateBirth = "1988-6-5",
                     pretend = 64000.0,
                     favori = false,
-                    note = "New 11",
+                    note = "Quisque facilisis, quam vel commodo posuere, libero neque efficitur felis, et egestas libero erat vitae ex. Ut id elit vel nisi vulputate vehicula.",
                 )
             )
 
@@ -225,11 +225,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Claire",
                     phone = "1234567890",
                     email = "claire.leroy@test12.com",
-                    picture = "url_picture_12",
+                    picture = "@drawable/female72",
                     dateBirth = "1993-8-27",
                     pretend = 66000.0,
                     favori = true,
-                    note = "New 12",
+                    note = "Integer fringilla enim nisi, sit amet varius ipsum blandit a. Etiam sit amet turpis tristique, pharetra felis eu, fringilla ex.",
                 )
             )
 
@@ -240,11 +240,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Antoine",
                     phone = "6789012345",
                     email = "antoine.roux@test13.com",
-                    picture = "url_picture_13",
+                    picture = "@drawable/male70",
                     dateBirth = "1986-10-19",
                     pretend = 67000.0,
                     favori = false,
-                    note = "New 13",
+                    note = "Suspendisse dictum blandit finibus. Cras in auctor nulla, ut mollis sapien. Aliquam et enim sapien. Ut faucibus neque mollis urna porta euismod. ",
                 )
             )
 
@@ -255,11 +255,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Camille",
                     phone = "2345678901",
                     email = "camille.girard@test14.com",
-                    picture = "url_picture_14",
+                    picture = "@drawable/female45",
                     dateBirth = "1982-4-17",
                     pretend = 64000.0,
                     favori = true,
-                    note = "New 14",
+                    note = "Curabitur vel commodo sem. Etiam fringilla, enim in mollis pellentesque, eros ligula egestas tortor, eu pellentesque purus tortor vel velit.",
                 )
             )
 
@@ -270,11 +270,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Louis",
                     phone = "3456789012",
                     email = "louis.gauthier@test15.com",
-                    picture = "url_picture_15",
+                    picture = "@drawable/male42",
                     dateBirth = "1987-3-8",
                     pretend = 63000.0,
                     favori = false,
-                    note = "New 15",
+                    note = "Pellentesque nunc purus, bibendum in nisl ut, tempus euismod est. Integer augue mi, viverra sit amet ultrices eget, malesuada eget ipsum. Curabitur vel commodo sem. Etiam fringilla, enim in mollis pellentesque, eros ligula egestas tortor, eu pellentesque purus tortor vel velit.",
                 )
             )
 
@@ -285,11 +285,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Alice",
                     phone = "4567890123",
                     email = "alice.perrin@test16.com",
-                    picture = "url_picture_16",
+                    picture = "@drawable/female44",
                     dateBirth = "1990-7-13",
                     pretend = 61000.0,
                     favori = true,
-                    note = "New 16",
+                    note = "Morbi tincidunt, massa auctor ultricies pulvinar, nulla ante gravida sapien, at consequat libero mauris eget turpis.",
                 )
             )
 
@@ -300,11 +300,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Thomas",
                     phone = "5678901234",
                     email = "thomas.chevalier@test17.com",
-                    picture = "url_picture_17",
+                    picture = "@drawable/male29",
                     dateBirth = "1983-1-2",
                     pretend = 60000.0,
                     favori = false,
-                    note = "New 17",
+                    note = "Quisque elementum sodales tempus. Vivamus quam nisl, mattis vitae facilisis sit amet, facilisis quis diam. In est felis, faucibus a sodales vitae, cursus id lorem.",
                 )
             )
 
@@ -315,11 +315,11 @@ abstract class AppDatabase : RoomDatabase(){
                     prenom = "Elodie",
                     phone = "6789012345",
                     email = "elodie.blanc@test18.com",
-                    picture = "url_picture_18",
+                    picture = "@drawable/female42",
                     dateBirth = "1989-9-9",
                     pretend = 62000.0,
                     favori = true,
-                    note = "New 18",
+                    note = "Suspendisse lobortis dolor bibendum pharetra imperdiet. Ut aliquet augue congue odio pretium faucibus. Sed vulputate aliquam sem, sed vehicula odio tincidunt at. Nunc id vestibulum magna.",
                 )
             )
 
