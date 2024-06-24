@@ -45,16 +45,18 @@ class  MainActivity : AppCompatActivity() {
     private fun setupTabLayout() {
         val tabLayout = binding.tabLayout
 
-        //add tabs
+        //setup tablayout
         val tabAll = tabLayout.newTab().apply { text = "TOUS" }
         val tabFavoris = tabLayout.newTab().apply { text = "FAVORIS" }
 
+        //add tabs
         tabLayout.addTab(tabAll)
         tabLayout.addTab(tabFavoris)
 
         //set Listener
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
+                Log.d("MAINACTIVITY", "Tab selected: ${tab.position}")
                 when (tab.position) {
                     0 -> loadFragment(CandidatsFragment())
                 }
@@ -74,14 +76,15 @@ class  MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
+        Log.d("MAINACTIVITY", "fun loadFragment called on fragment: ${fragment.javaClass.simpleName}")
         supportFragmentManager.beginTransaction()
             .replace(R.id.Container_Fragment, fragment)
             .commit()
     }
 
-    suspend fun getCandidat(db: AppDatabase) {
+    private suspend fun getCandidat(db: AppDatabase) {
         db.candidatDao().getAllCandidat().collect {
-            Log.d("MAINACTIVITY", "getCandidat called")
+            Log.d("MAINACTIVITY", "fun getCandidat called")
         }
     }
 }

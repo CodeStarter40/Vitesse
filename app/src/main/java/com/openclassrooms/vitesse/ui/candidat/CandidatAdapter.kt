@@ -1,5 +1,6 @@
 package com.openclassrooms.vitesse.ui.candidat
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class CandidatAdapter : ListAdapter<Candidat, CandidatAdapter.CandidatViewHolder
     override fun onBindViewHolder(holder: CandidatViewHolder, position: Int) {
         //get the candidat at the postion
         val candidat = getItem(position)
+        Log.d("CANDIDATADAPTER", "Bind candidat at position $position: ${candidat.prenom} ${candidat.nom}")
         holder.bind(candidat)
     }
 
