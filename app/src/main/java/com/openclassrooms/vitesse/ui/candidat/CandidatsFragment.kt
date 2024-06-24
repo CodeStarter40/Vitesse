@@ -1,15 +1,18 @@
 package com.openclassrooms.vitesse.ui.candidat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.vitesse.databinding.FragmentCandidatsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -23,6 +26,7 @@ class CandidatsFragment : Fragment(){
     override  fun onCreateView(
         inflater: LayoutInflater,container:ViewGroup?,savedInstanceState: Bundle?
     ): View {
+        Log.d("CANDIDATSFRAGMENT", "onCreateView called")
         //use binding for inflating the xmlLayout of this fragment
         binding = FragmentCandidatsBinding.inflate(inflater,container,false)
         //return the root view of the layout
@@ -32,6 +36,7 @@ class CandidatsFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("CANDIDATSFRAGMENT", "onViewCreated called")
 
         //init the adapter for the recyclerview
         val adapter = CandidatAdapter()
@@ -43,7 +48,7 @@ class CandidatsFragment : Fragment(){
         //observe the livedata from viewModel and submit the list to the adapter
         viewModel.candidats.observe(viewLifecycleOwner, Observer { candidats ->
             //if the list is not null, submit it to the adapter
-            candidats?.let { adapter.submitList(it) } })
+            candidats?.let { adapter.submitList(candidats) } })
     }
 
 }

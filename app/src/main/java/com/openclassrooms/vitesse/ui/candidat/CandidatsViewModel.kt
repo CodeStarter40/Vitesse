@@ -1,5 +1,6 @@
 package com.openclassrooms.vitesse.ui.candidat
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,7 @@ class CandidatsViewModel @Inject constructor(private val db: AppDatabase) : View
             db.candidatDao().getAllCandidat().collect { candidatsDto ->
                 val candidats = candidatsDto.map { Candidat.fromDto(it) }
                 _candidats.postValue(candidats)
+                Log.d("CANDIDATSVIEWMODEL", "Loaded Candidats: ${candidats.size}")
             }
         }
     }
