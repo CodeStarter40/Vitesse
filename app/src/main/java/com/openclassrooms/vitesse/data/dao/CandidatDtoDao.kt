@@ -14,6 +14,9 @@ interface CandidatDtoDao {
     @Query("SELECT * FROM candidat")
     fun getAllCandidat(): Flow<List<CandidatDto>>
 
+    @Query("SELECT * FROM candidat WHERE favori = 1")
+    fun getFavoris(): Flow<List<CandidatDto>>
+
     @Insert
     suspend fun insertCandidat(candidat: CandidatDto)
 

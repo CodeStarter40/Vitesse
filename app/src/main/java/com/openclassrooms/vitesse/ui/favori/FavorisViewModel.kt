@@ -24,10 +24,10 @@ class FavorisViewModel @Inject constructor(private val db: AppDatabase) : ViewMo
 
     private fun loadFavoris() {
         viewModelScope.launch {
-            db.candidatDao().getAllCandidat().collect { candidatsDto ->
-                val candidats = candidatsDto.map { Candidat.fromDto(it) }
-                _favoris.postValue(candidats)
-                Log.d("FAVORISVIEWMODEL", "Loaded Favoris: ${candidats.size}")
+            db.candidatDao().getFavoris().collect { candidatsDto ->
+                val favoris = candidatsDto.map { Candidat.fromDto(it) }
+                _favoris.postValue(favoris)
+                Log.d("FAVORISVIEWMODEL", "Loaded Favoris: ${favoris.size}")
             }
         }
     }

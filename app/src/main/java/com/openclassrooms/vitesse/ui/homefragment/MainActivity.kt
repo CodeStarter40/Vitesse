@@ -61,6 +61,7 @@ class  MainActivity : AppCompatActivity() {
                 when (tab.position) {
                     //bind pos to fragment
                     0 -> loadFragment(CandidatsFragment())
+                    1 -> loadFragment(FavorisFragment())
                 }
             }
 
