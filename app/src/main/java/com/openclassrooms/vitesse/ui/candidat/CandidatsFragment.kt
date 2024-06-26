@@ -5,12 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.FragmentCandidatsBinding
+import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 class CandidatsFragment : Fragment() {
@@ -18,6 +22,8 @@ class CandidatsFragment : Fragment() {
     private lateinit var binding: FragmentCandidatsBinding
     //init viewModel using viewModels delegate
     private val viewModel: CandidatsViewModel by viewModels()
+    private lateinit var adapter: CandidatAdapter
+    private var allCandidats: List<Candidat> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +31,7 @@ class CandidatsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         Log.d("CANDIDATSFRAGMENT", "onCreateView called")
-        //use binding for inflating the xmlLayout of this fragment
+        //binding for inflating the xmlLayout of this fragment
         binding = FragmentCandidatsBinding.inflate(inflater, container, false)
         //return the root view of the binding
         return binding.root
@@ -36,7 +42,7 @@ class CandidatsFragment : Fragment() {
         Log.d("CANDIDATSFRAGMENT", "onViewCreated called")
 
         //init the adapter for the recyclerview
-        val adapter = CandidatAdapter()
+        adapter = CandidatAdapter()
 
         //set the layoutManager for the recyclerview
         binding.candidatRecyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -45,12 +51,38 @@ class CandidatsFragment : Fragment() {
         //observe livedata from viewmodel and submit the list to the adapter
         viewModel.candidats.observe(viewLifecycleOwner, Observer { candidats ->
             Log.d("CANDIDATSFRAGMENT", "Observed candidats: ${candidats.size}")
-            if (candidats.isEmpty()) {
-                Log.d("CANDIDATSFRAGMENT", "No candidats on display")
-            } else {
-                Log.d("CANDIDATSFRAGMENT", "Candidats on display: ${candidats.size}")
-            }
+            allCandidats = candidats
             adapter.submitList(candidats)
         })
+
+        //init the searchview
+        setupSearchView()
+    }
+
+    private fun setupSearchView() {
+        val searchView = requireActivity().findViewById<SearchView>(R.id.search_View)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                filterCandidats(query ?: "")
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterCandidats(newText ?: "")
+                return true
+            }
+        })
+    }
+
+    //filter the list of candidats based on the query
+    private fun filterCandidats(query: String) {
+        val filteredList = if (query.isNotEmpty()) {
+            allCandidats.filter {
+                it.nom.contains(query, ignoreCase = true) || it.prenom.contains(query, ignoreCase = true) || it.note.contains(query, ignoreCase = true)
+            }
+        } else {
+            allCandidats
+        }
+        adapter.submitList(filteredList) //update the adapter with the filtered list
     }
 }

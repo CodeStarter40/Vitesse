@@ -108,7 +108,7 @@ abstract class AppDatabase : RoomDatabase(){
                     picture = "@drawable/female90",
                     dateBirth = "1987-7-12",
                     pretend = 62000.0,
-                    favori = true,
+                    favori = false,
                     note = "Aenean a lectus sed est fringilla mollis. Nam accumsan justo vel lacus pretium rutrum. Suspendisse lobortis dolor bibendum pharetra imperdiet. Ut aliquet augue congue odio pretium faucibus. Sed vulputate aliquam sem, sed vehicula odio tincidunt at. Nunc id vestibulum magna. Aenean quis sodales sapien.",
                 )
             )
