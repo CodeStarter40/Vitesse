@@ -64,6 +64,8 @@ class CandidatsFragment : Fragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 filterCandidats(query ?: "")
+                //hide the keyboard
+                searchView.clearFocus()
                 return true
             }
 
