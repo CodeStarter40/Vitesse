@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.FragmentCandidatsBinding
 import com.openclassrooms.vitesse.domain.model.Candidat
+import com.openclassrooms.vitesse.ui.detail.DetailCandidatFragment
+import com.openclassrooms.vitesse.ui.homefragment.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 @AndroidEntryPoint
 class CandidatsFragment : Fragment() {
@@ -42,7 +43,14 @@ class CandidatsFragment : Fragment() {
         Log.d("CANDIDATSFRAGMENT", "onViewCreated called")
 
         //init the adapter for the recyclerview
-        adapter = CandidatAdapter()
+        adapter = CandidatAdapter { candidat ->
+            val bundle = Bundle().apply {
+                putLong("candidatId", candidat.id)
+            }
+            val fragment = DetailCandidatFragment()
+            fragment.arguments = bundle
+            (activity as MainActivity).loadFragment(fragment)
+        }
 
         //set the layoutManager for the recyclerview
         binding.candidatRecyclerview.layoutManager = LinearLayoutManager(requireContext())

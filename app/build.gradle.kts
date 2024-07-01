@@ -25,6 +25,10 @@ android {
     viewBinding {
         enable = true
     }
+    buildFeatures {
+        //noinspection DataBindingWithoutKapt
+        dataBinding = true
+    }
 
     buildTypes {
         release {
@@ -102,6 +106,7 @@ dependencies {
     //imp Cycle de vie
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
     implementation("androidx.fragment:fragment-ktx:1.8.0")
+
 
 }
 

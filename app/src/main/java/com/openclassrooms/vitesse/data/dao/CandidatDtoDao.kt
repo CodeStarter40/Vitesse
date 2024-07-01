@@ -32,7 +32,6 @@ interface CandidatDtoDao {
     @Query("DELETE FROM candidat")
     suspend fun deleteAllCandidat()
 
-
-
-
+    @Query("SELECT * FROM candidat WHERE id = :candidatId")
+    fun getCandidatById(candidatId: Long): CandidatDto
 }
