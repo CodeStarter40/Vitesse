@@ -10,13 +10,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.vitesse.databinding.FragmentFavorisBinding
+import com.openclassrooms.vitesse.ui.candidat.CandidatAdapter
 import com.openclassrooms.vitesse.ui.candidat.FavorisAdapter
+import com.openclassrooms.vitesse.ui.detail.DetailCandidatFragment
+import com.openclassrooms.vitesse.ui.homefragment.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavorisFragment:Fragment() {
 
     private lateinit var binding: FragmentFavorisBinding
+    private lateinit var adapter: FavorisAdapter
     //init viewModel
     private val viewModel: FavorisViewModel by viewModels()
 
@@ -37,7 +41,14 @@ class FavorisFragment:Fragment() {
         Log.d("FAVORISFRAGMENT", "onViewCreated called")
 
         //init the adapter for the recyclerview
-        val adapter = FavorisAdapter()
+        adapter = FavorisAdapter { candidat ->
+            val bundle = Bundle().apply {
+                putLong("candidatId", candidat.id)
+            }
+            val fragment = DetailCandidatFragment()
+            fragment.arguments = bundle
+            (activity as MainActivity).loadFragment(fragment)
+        }
 
         //set the layoutManager for the recyclerview
         binding.favorisRecyclerview.layoutManager = LinearLayoutManager(requireContext())

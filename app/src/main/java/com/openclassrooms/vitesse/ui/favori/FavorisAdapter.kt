@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.domain.model.Candidat
 
-class FavorisAdapter : ListAdapter<Candidat, FavorisAdapter.FavorisViewHolder>(
+class FavorisAdapter(private val onItemClicked: (Candidat) -> Unit) : ListAdapter<Candidat, FavorisAdapter.FavorisViewHolder>(
     CandidatDiffCallback()
 ) {
 
@@ -22,7 +22,7 @@ class FavorisAdapter : ListAdapter<Candidat, FavorisAdapter.FavorisViewHolder>(
             .inflate(R.layout.item_adapter, parent, false)
 
         //return the viewholder with the newinstance of the view
-        return FavorisViewHolder(view)
+        return FavorisViewHolder(view,onItemClicked)
     }
 
     //method to bind the data to the view with position of the item
@@ -34,7 +34,7 @@ class FavorisAdapter : ListAdapter<Candidat, FavorisAdapter.FavorisViewHolder>(
     }
 
     //link the view to the candidat data
-    class FavorisViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class FavorisViewHolder(itemView: View, val onItemClicked: (Candidat) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val prenomTextView: TextView = itemView.findViewById(R.id.item_card_prenom)
         private val nomTextView: TextView = itemView.findViewById(R.id.item_card_nom)
         private val noteTextView: TextView = itemView.findViewById(R.id.item_card_note)
@@ -45,6 +45,9 @@ class FavorisAdapter : ListAdapter<Candidat, FavorisAdapter.FavorisViewHolder>(
             prenomTextView.text = candidat.prenom
             nomTextView.text = candidat.nom
             noteTextView.text = candidat.note
+            itemView.setOnClickListener {
+                onItemClicked(candidat)
+            }
 
             val context = itemView.context
             val resourceId = context.resources.getIdentifier(candidat.picture, "drawable", context.packageName)
