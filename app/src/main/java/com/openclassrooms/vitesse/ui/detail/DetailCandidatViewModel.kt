@@ -27,8 +27,6 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase) :
         }
     }
 
-
-
     fun toggleFavori(candidat: Candidat) {
         viewModelScope.launch(Dispatchers.IO) {
             candidat.favori = !candidat.favori

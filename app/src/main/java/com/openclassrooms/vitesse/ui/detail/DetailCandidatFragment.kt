@@ -1,5 +1,7 @@
 package com.openclassrooms.vitesse.ui.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,10 @@ import com.openclassrooms.vitesse.ui.candidat.DetailCandidatViewModel
 import com.openclassrooms.vitesse.databinding.FragmentDetailcandidatBinding
 import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -66,6 +72,36 @@ class DetailCandidatFragment : Fragment() {
                     binding.delete.setOnClickListener {
                         showDeleteConfirmationDialog(candidat)
                     }
+                    //verify if phonenumber is present and adapt the opacity icon and activ or desactiv the button
+                    if (candidat.phone.isEmpty()) {
+                        binding.iconCall.alpha = 0.2f
+                        binding.iconCall.isEnabled = false
+                        binding.iconSms.alpha = 0.2f
+                        binding.iconSms.isEnabled = false
+                    }
+
+                    //verify if email is present and adapt the opacity icon and activ or desactiv the button
+                    if (candidat.email.isEmpty()) {
+                        binding.iconEmail.alpha = 0.2f
+                        binding.iconEmail.isEnabled = false
+                    }
+
+                    //dialCandidat on click call icon
+                    binding.iconCall.setOnClickListener {
+                        dialCandidat(candidat.phone)
+                    }
+                    //sendSmsCandidat on click sms icon
+                    binding.iconSms.setOnClickListener {
+                        sendSmsCandidat(candidat.phone)
+                    }
+                    //sendMailToCandidat on click email icon
+                    binding.iconEmail.setOnClickListener {
+                        sendMailToCandidat(candidat.email)
+                    }
+                    //calcul age candidat
+
+                    val age = calculateAge(candidat.dateBirth)
+                    binding.ageaCalcule.text = "$age ans"
                 }
             }
         }
@@ -82,5 +118,33 @@ class DetailCandidatFragment : Fragment() {
             }
             .setNegativeButton("Non", null)
             .show()
+    }
+
+    //call candidat
+    private fun dialCandidat(phone: String){
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$phone")
+        startActivity(intent)
+    }
+
+    //sms to candidat
+    private fun sendSmsCandidat(phone: String){
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("smsto:$phone")
+        startActivity(intent)
+    }
+    //send mail to candidat
+    private fun sendMailToCandidat(email: String){
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("mailto:$email")
+        startActivity(intent)
+    }
+    //calcul Candidat age with local date and dateofbirth
+    private fun calculateAge(dateOfBirth: String): Int {
+        val formattedDateOfBirth = dateOfBirth.trim()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.FRENCH)
+        val birthDate = LocalDate.parse(formattedDateOfBirth, formatter)
+        val currentDate = LocalDate.now()
+        return Period.between(birthDate, currentDate).years
     }
 }
