@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.ui.candidat.DetailCandidatViewModel
 import com.openclassrooms.vitesse.databinding.FragmentDetailcandidatBinding
+import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -58,8 +61,26 @@ class DetailCandidatFragment : Fragment() {
                     //togglefavori check for adapt star icon
                     binding.favorite.setImageResource(
                         if (candidat.favori) R.drawable.icon_star_full else R.drawable.icon_star_empty)
+
+                    //deleteCandidat on click trash icon and back to CandidatFragment
+                    binding.delete.setOnClickListener {
+                        showDeleteConfirmationDialog(candidat)
+                    }
                 }
             }
         }
+    }
+    //showDeleteConfirmationDialog with confirmation toast message and delete
+    private fun showDeleteConfirmationDialog(candidat: Candidat) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Confirmer la suppression de ${candidat.prenom} ${candidat.nom} ?")
+            .setMessage("Cette action est irreversible, est-ce que vous souhaitez continuer?")
+            .setPositiveButton("Oui") { dialog,which ->
+                viewModel.deleteCandidat(candidat)
+                Toast.makeText(requireContext(), "Candidat supprimé", Toast.LENGTH_SHORT).show()
+                requireActivity().supportFragmentManager.popBackStack()
+            }
+            .setNegativeButton("Non", null)
+            .show()
     }
 }
