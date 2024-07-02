@@ -27,6 +27,8 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase) :
         }
     }
 
+
+
     fun toggleFavori(candidat: Candidat) {
         viewModelScope.launch(Dispatchers.IO) {
             candidat.favori = !candidat.favori
@@ -34,6 +36,15 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase) :
             Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori UPDATE CANDIDAT")
             _candidat.postValue(candidat)
             Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori COMPLETED")
+        }
+    }
+
+    fun deleteCandidat(candidat: Candidat) {
+        viewModelScope.launch(Dispatchers.IO) {
+            db.candidatDao().deleteCandidat(candidat.toDto())
+            Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat DELETE CANDIDAT")
+            _candidat.postValue(null)
+            Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat COMPLETED")
         }
     }
 }

@@ -73,6 +73,7 @@
                     android:layout_height="200dp"
                     android:src="@drawable/male29"
                     android:scaleType="centerCrop"
+                    android:shadowRadius="16"
                     android:contentDescription="profile_picture" />
 
                 <LinearLayout
@@ -154,18 +155,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:padding="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="#f7e9ff">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="A propos"
+                            android:paddingStart="10dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                         <TextView
@@ -173,6 +178,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:paddingStart="10dp"
                             android:text="03/03/1989"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <TextView
@@ -180,6 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:paddingStart="10dp"
                             android:text="(34 ans)"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -187,6 +194,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:paddingStart="10dp"
                             android:text="Anniversaire"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
@@ -198,18 +206,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:padding="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="#f7e9ff">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Prétentions salariales"
+                            android:paddingStart="10dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                         <TextView
@@ -218,6 +230,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="3500 €"
+                            android:paddingStart="10dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                         <TextView
@@ -226,6 +239,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="soit £ 3026,99"
+                            android:paddingStart="10dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                     </LinearLayout>
@@ -236,18 +250,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:padding="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="#f7e9ff">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Notes"
+                            android:paddingStart="10dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                         <TextView
@@ -255,6 +273,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
                             android:text="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
