@@ -47,4 +47,8 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase) :
             Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat COMPLETED")
         }
     }
+
+    fun modifyCandidat(candidat: Candidat) {
+        //WIP
+    }
 }
