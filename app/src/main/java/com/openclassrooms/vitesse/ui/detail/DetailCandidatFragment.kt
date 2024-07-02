@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.ui.candidat.DetailCandidatViewModel
 import com.openclassrooms.vitesse.databinding.FragmentDetailcandidatBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,13 @@ class DetailCandidatFragment : Fragment() {
                     //back to CandidatFragment
                     binding.toolbar.setNavigationOnClickListener {
                         requireActivity().supportFragmentManager.popBackStack() }
+                    //togglefavori clickListener
+                    binding.favorite.setOnClickListener {
+                        viewModel.candidat.value?.let { candidat -> viewModel.toggleFavori(candidat) }
+                    }
+                    //togglefavori check for adapt star icon
+                    binding.favorite.setImageResource(
+                        if (candidat.favori) R.drawable.icon_star_full else R.drawable.icon_star_empty)
                 }
             }
         }
