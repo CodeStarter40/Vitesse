@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.FragmentCandidatsBinding
 import com.openclassrooms.vitesse.domain.model.Candidat
+import com.openclassrooms.vitesse.ui.addedit.AddEditCandidatFragment
 import com.openclassrooms.vitesse.ui.detail.DetailCandidatFragment
 import com.openclassrooms.vitesse.ui.homefragment.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +54,16 @@ class CandidatsFragment : Fragment() {
             (activity as MainActivity).loadFragment(fragment)
         }
 
+        //init the fab button
+        val fab : FloatingActionButton = binding.fab
+        fab.setOnClickListener {
+            val fragment = AddEditCandidatFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.Container_Fragment, fragment)
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+
         //set the layoutManager for the recyclerview
         binding.candidatRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.candidatRecyclerview.adapter = adapter
@@ -66,6 +78,7 @@ class CandidatsFragment : Fragment() {
         //init the searchview
         setupSearchView()
     }
+
 
     private fun setupSearchView() {
         val searchView = requireActivity().findViewById<SearchView>(R.id.search_View)
