@@ -2,6 +2,7 @@ package com.openclassrooms.vitesse.ui.candidat
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -39,6 +40,25 @@ class FavorisAdapter(private val onItemClicked: (Candidat) -> Unit) : ListAdapte
         private val nomTextView: TextView = itemView.findViewById(R.id.item_card_nom)
         private val noteTextView: TextView = itemView.findViewById(R.id.item_card_note)
         private val imageView: ImageView = itemView.findViewById(R.id.item_card_image)
+
+        //make effect elevation on click on the view
+        init {
+            itemView.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        v.elevation = -7f
+                        v.scaleX = 1f
+                        v.scaleY = 1f
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        v.elevation = 7f
+                        v.scaleX = 1f
+                        v.scaleY = 1f
+                    }
+                }
+                false
+            }
+        }
 
         //bind the candidat data to the view
         fun bind(candidat: Candidat) {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -105,7 +106,34 @@ class DetailCandidatFragment : Fragment() {
                 }
             }
         }
+        applyElevationEffect(binding.toolbar)
+        applyElevationEffect(binding.delete)
+        applyElevationEffect(binding.favorite)
+        applyElevationEffect(binding.iconCall)
+        applyElevationEffect(binding.iconSms)
+        applyElevationEffect(binding.iconEmail)
     }
+
+    //elevation effect on click
+    private fun applyElevationEffect(view: View) {
+        view.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.elevation = -8f
+                    v.scaleX = 0.80f
+                    v.scaleY = 0.80f
+                }
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    v.elevation = 8f
+                    v.scaleX = 1f
+                    v.scaleY = 1f
+                }
+            }
+            false
+        }
+    }
+
     //showDeleteConfirmationDialog with confirmation toast message and delete
     private fun showDeleteConfirmationDialog(candidat: Candidat) {
         AlertDialog.Builder(requireContext())

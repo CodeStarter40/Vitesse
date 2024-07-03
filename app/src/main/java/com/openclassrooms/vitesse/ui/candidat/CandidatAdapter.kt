@@ -2,6 +2,7 @@ package com.openclassrooms.vitesse.ui.candidat
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -44,6 +45,25 @@ class CandidatAdapter (private val onItemClicked: (Candidat) -> Unit) : ListAdap
         private val noteTextView: TextView = itemView.findViewById(R.id.item_card_note)
         private val imageView: ImageView = itemView.findViewById(R.id.item_card_image)
 
+        init {
+            itemView.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        v.elevation = -8f
+                        v.scaleX = 0.95f
+                        v.scaleY = 0.95f
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        v.elevation = 8f
+                        v.scaleX = 1f
+                        v.scaleY = 1f
+                    }
+                }
+                false
+            }
+        }
+
+
         //bind the candidat data to the view
         fun bind(candidat: Candidat) {
             prenomTextView.text = candidat.prenom
@@ -58,9 +78,12 @@ class CandidatAdapter (private val onItemClicked: (Candidat) -> Unit) : ListAdap
                     "drawable",
                     context.packageName
                 )
+
                 imageView.setImageResource(resourceId)
 
             }
+
+
         }
 
         //declaration of the diffutil
