@@ -1,5 +1,6 @@
 package com.openclassrooms.vitesse.ui.candidat
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -38,6 +39,7 @@ class CandidatAdapter (private val onItemClicked: (Candidat) -> Unit) : ListAdap
     }
 
     //link the view to the candidat data
+    @SuppressLint("ClickableViewAccessibility")
     class CandidatViewHolder(itemView: View, val onItemClicked: (Candidat) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val prenomTextView: TextView = itemView.findViewById(R.id.item_card_prenom)

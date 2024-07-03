@@ -1,5 +1,6 @@
-package com.openclassrooms.vitesse.ui.candidat
+package com.openclassrooms.vitesse.ui.favori
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -35,6 +36,7 @@ class FavorisAdapter(private val onItemClicked: (Candidat) -> Unit) : ListAdapte
     }
 
     //link the view to the candidat data
+    @SuppressLint("ClickableViewAccessibility")
     class FavorisViewHolder(itemView: View, val onItemClicked: (Candidat) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val prenomTextView: TextView = itemView.findViewById(R.id.item_card_prenom)
         private val nomTextView: TextView = itemView.findViewById(R.id.item_card_nom)
