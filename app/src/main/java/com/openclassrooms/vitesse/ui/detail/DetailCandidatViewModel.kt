@@ -1,4 +1,4 @@
-package com.openclassrooms.vitesse.ui.candidat
+package com.openclassrooms.vitesse.ui.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData

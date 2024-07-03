@@ -12,7 +12,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.vitesse.R
-import com.openclassrooms.vitesse.ui.candidat.DetailCandidatViewModel
 import com.openclassrooms.vitesse.databinding.FragmentDetailcandidatBinding
 import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.AndroidEntryPoint
