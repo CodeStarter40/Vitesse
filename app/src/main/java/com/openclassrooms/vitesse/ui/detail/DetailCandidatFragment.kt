@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.fragment.app.viewModels
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.FragmentDetailcandidatBinding
 import com.openclassrooms.vitesse.domain.model.Candidat
+import com.openclassrooms.vitesse.ui.addedit.AddEditCandidatFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.Period
@@ -39,6 +41,7 @@ class DetailCandidatFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,7 +60,10 @@ class DetailCandidatFragment : Fragment() {
                         resources.getIdentifier(candidat.picture, "drawable", requireContext().packageName)
                     )
                     binding.textViewDateNaissance.text = candidat.dateBirth
-                    binding.salairePretend.text = candidat.pretend.toString()
+
+                    //salairePretend adapt
+                    binding.salairePretend.text = "${candidat.pretend} €"
+
                     //back to CandidatFragment
                     binding.toolbar.setNavigationOnClickListener {
                         requireActivity().supportFragmentManager.popBackStack() }
@@ -103,6 +109,12 @@ class DetailCandidatFragment : Fragment() {
 
                     val age = calculateAge(candidat.dateBirth)
                     binding.ageaCalcule.text = "$age ans"
+
+                    //sendCandidatToEditFragment on click edit icon
+                    binding.edit.setOnClickListener {
+                        sendCandidatToEditFragment(candidat)
+                    }
+                    binding.textViewSalaireLSCalcule.text = "soit £ ${convertPretendToPound(candidat.pretend)}"
                 }
             }
         }
@@ -112,6 +124,7 @@ class DetailCandidatFragment : Fragment() {
         applyElevationEffect(binding.iconCall)
         applyElevationEffect(binding.iconSms)
         applyElevationEffect(binding.iconEmail)
+        applyElevationEffect(binding.edit)
     }
 
     //elevation effect on click
@@ -175,5 +188,25 @@ class DetailCandidatFragment : Fragment() {
         val birthDate = LocalDate.parse(formattedDateOfBirth, formatter)
         val currentDate = LocalDate.now()
         return Period.between(birthDate, currentDate).years
+    }
+    //convert pretend euro to pound
+    private fun convertPretendToPound(pretend: Double): Double {
+        return pretend * 0.85
+    }
+
+
+    //send this candidat in to editfragment for update
+    private fun sendCandidatToEditFragment(candidat: Candidat){
+        val editFragment = AddEditCandidatFragment()
+        val bundle = Bundle()
+        Log.d("DETAILCANDIDATFRAGMENT", "sendCandidatToEditFragment called")
+        bundle.putLong("candidatId", candidat.id)
+        editFragment.arguments = bundle
+
+        //starting transaction with fragment edit
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.Container_Fragment, editFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
