@@ -10,8 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.vitesse.databinding.FragmentFavorisBinding
-import com.openclassrooms.vitesse.ui.candidat.CandidatAdapter
-import com.openclassrooms.vitesse.ui.candidat.FavorisAdapter
 import com.openclassrooms.vitesse.ui.detail.DetailCandidatFragment
 import com.openclassrooms.vitesse.ui.homefragment.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
