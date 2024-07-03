@@ -1,5 +1,6 @@
 package com.openclassrooms.vitesse.ui.detail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -114,6 +115,7 @@ class DetailCandidatFragment : Fragment() {
     }
 
     //elevation effect on click
+    @SuppressLint("ClickableViewAccessibility")
     private fun applyElevationEffect(view: View) {
         view.setOnTouchListener { v, event ->
             when (event.action) {
@@ -169,7 +171,7 @@ class DetailCandidatFragment : Fragment() {
     //calcul Candidat age with local date and dateofbirth
     private fun calculateAge(dateOfBirth: String): Int {
         val formattedDateOfBirth = dateOfBirth.trim()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.FRENCH)
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.FRENCH)
         val birthDate = LocalDate.parse(formattedDateOfBirth, formatter)
         val currentDate = LocalDate.now()
         return Period.between(birthDate, currentDate).years

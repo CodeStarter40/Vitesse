@@ -143,7 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint=" Date de naissance (jj/MM/YYYY)">
+                    android:hint=" Date de naissance (DD-MM-YYYY)">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputBirthDate"
