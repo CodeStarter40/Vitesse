@@ -61,6 +61,10 @@ class AddEditCandidatFragment : Fragment() {
                 Toast.makeText(requireContext(), "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.toolbar.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     override fun onDestroyView() {
