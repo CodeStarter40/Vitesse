@@ -80,6 +80,7 @@ class AddEditCandidatFragment : Fragment() {
             }
         }
     }
+    //preLoadFields from candidat
     private fun preLoadFields(candidat: Candidat) {
         binding.inputPrenom.setText(candidat.prenom)
         binding.inputNom.setText(candidat.nom)
@@ -88,6 +89,9 @@ class AddEditCandidatFragment : Fragment() {
         binding.inputBirthDate.setText(candidat.dateBirth)
         binding.inputSalarial.setText(candidat.pretend.toString())
         binding.inputNote.setText(candidat.note)
+        binding.inputImageProfilCandidat.setImageResource(
+            resources.getIdentifier(candidat.picture, "drawable", requireContext().packageName)
+        )
     }
 
     override fun onDestroyView() {
