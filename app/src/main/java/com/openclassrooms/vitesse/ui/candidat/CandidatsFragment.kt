@@ -114,6 +114,7 @@ class CandidatsFragment : Fragment() {
         checkEmptyList(filteredList)
     }
 
+    //check if the list is empty and show a message to the user
     private fun checkEmptyList(list: List<Candidat>) {
         binding.noResultsCandidats.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
     }
