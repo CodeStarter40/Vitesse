@@ -1,11 +1,17 @@
 package com.openclassrooms.vitesse.ui.addedit
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.vitesse.databinding.FragmentAddeditcandidatBinding
@@ -19,6 +25,8 @@ class AddEditCandidatFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: AddEditCandidatViewModel by viewModels()
     private var candidatId: Long = -1
+    private var selectedImageUri: Uri? = null //store selected image uri
+    private var existingCandidat: Candidat? = null //store existing candidat
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +56,11 @@ class AddEditCandidatFragment : Fragment() {
             }
         }
 
+        //binding imageProfilCandidat for execute checkPermissionAndOpenGallery L120
+        binding.inputImageProfilCandidat.setOnClickListener {
+            openGallery()
+        }
+
         binding.buttonSave.setOnClickListener {
             val prenom = binding.inputPrenom.text.toString()
             val nom = binding.inputNom.text.toString()
@@ -58,6 +71,7 @@ class AddEditCandidatFragment : Fragment() {
             val note = binding.inputNote.text.toString()
 
             if (prenom.isNotEmpty() && nom.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty() && dateBirth.isNotEmpty() && pretend.toString().isNotEmpty() && note.isNotEmpty()) {
+                val picture = selectedImageUri?.toString() ?: existingCandidat?.picture ?: "male29"
                 val candidat = Candidat(
                     id = if (candidatId == -1L) 0 else candidatId,
                     prenom = prenom,
@@ -68,8 +82,9 @@ class AddEditCandidatFragment : Fragment() {
                     pretend = pretend,
                     note = note,
                     favori = false, //default false
-                    picture = "male29" //default picture set for exemple, but u can set your function for taking photo
+                    picture = picture
                 )
+
                 viewModel.saveCandidat(candidat) //use saveCandidat added on VModel
                 //navigade back to fragmentCandidat and show success toast message
                 requireActivity().supportFragmentManager.popBackStack()
@@ -80,6 +95,7 @@ class AddEditCandidatFragment : Fragment() {
             }
         }
     }
+
     //preLoadFields from candidat
     private fun preLoadFields(candidat: Candidat) {
         binding.inputPrenom.setText(candidat.prenom)
@@ -89,9 +105,55 @@ class AddEditCandidatFragment : Fragment() {
         binding.inputBirthDate.setText(candidat.dateBirth)
         binding.inputSalarial.setText(candidat.pretend.toString())
         binding.inputNote.setText(candidat.note)
-        binding.inputImageProfilCandidat.setImageResource(
-            resources.getIdentifier(candidat.picture, "drawable", requireContext().packageName)
-        )
+
+        candidat.picture.let { picture ->
+            if (picture.startsWith("content://") || picture.startsWith("file://")) {
+                binding.inputImageProfilCandidat.setImageURI(Uri.parse(picture))
+            } else {
+                val imageResId = requireContext().resources.getIdentifier(picture, "drawable", requireContext().packageName)
+                binding.inputImageProfilCandidat.setImageResource(imageResId)
+            }
+        }
+    }
+
+    /*
+    //abandonned function for this moment...
+    //check permission and open Gallery
+    private fun checkPermissionAndOpenGallery() {
+        when {
+            //check if permission is granted
+            ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
+                openGallery()
+                Log.d("ADDEDITCANDIDAT", "checkPermissionAndOpenGallery : PERMISSION GRANTED")
+            }
+            else -> {
+                //ask for the permission
+                requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                Log.d("ADDEDITCANDIDAT", "checkPermissionAndOpenGallery NO : requestPermissionLauncher : PERMISSION REQUESTED")
+            }
+        }
+    }
+
+    //val requestPermissionLauncher
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted : Boolean ->
+        if (isGranted) { openGallery()
+        } else {
+            Toast.makeText(requireContext(), "Permission refusée", Toast.LENGTH_SHORT).show()
+            Log.d("ADDEDITCANDIDAT", "RequestPermissionLauncher : PERMISSION REFUSED")
+        }
+    }*/
+
+    //open gallery image
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        resultLauncher.launch(intent)
+    }
+
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            selectedImageUri = result.data!!.data
+            binding.inputImageProfilCandidat.setImageURI(selectedImageUri)
+        }
     }
 
     override fun onDestroyView() {

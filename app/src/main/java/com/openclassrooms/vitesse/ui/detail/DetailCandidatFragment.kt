@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.databinding.FragmentDetailcandidatBinding
 import com.openclassrooms.vitesse.domain.model.Candidat
@@ -56,9 +57,10 @@ class DetailCandidatFragment : Fragment() {
             viewModel.candidat.observe(viewLifecycleOwner) { candidat ->
                 candidat?.let {
                     binding.toolbar.title = "${candidat.prenom} ${candidat.nom}"
-                    binding.imageProfilCandidat.setImageResource(
+                    loadPicture(candidat.picture)
+                    /*binding.imageProfilCandidat.setImageResource(
                         resources.getIdentifier(candidat.picture, "drawable", requireContext().packageName)
-                    )
+                    )*/
                     binding.textViewDateNaissance.text = candidat.dateBirth
 
                     //salairePretend adapt
@@ -115,6 +117,9 @@ class DetailCandidatFragment : Fragment() {
                     }
                     //binding of salairePretend in pound
                     binding.textViewSalaireLSCalcule.text = "soit £ ${convertPretendToPound(candidat.pretend)}"
+
+                    //binding note adapt
+                    binding.textNotes.text = candidat.note
                 }
             }
         }
@@ -125,6 +130,17 @@ class DetailCandidatFragment : Fragment() {
         applyElevationEffect(binding.iconSms)
         applyElevationEffect(binding.iconEmail)
         applyElevationEffect(binding.edit)
+    }
+
+    //load picture with glide
+    private fun loadPicture(picture: String) {
+        if (picture.startsWith("content://") || picture.startsWith("file://")) {
+            Glide.with(this).load(Uri.parse(picture)).into(binding.imageProfilCandidat)
+        }
+        else {
+            val imageResId = requireContext().resources.getIdentifier(picture, "drawable", requireContext().packageName)
+            Glide.with(this).load(imageResId).into(binding.imageProfilCandidat)
+        }
     }
 
     //elevation effect on click
@@ -153,12 +169,12 @@ class DetailCandidatFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Confirmer la suppression de ${candidat.prenom} ${candidat.nom} ?")
             .setMessage("Cette action est irreversible, est-ce que vous souhaitez continuer?")
-            .setPositiveButton("Oui") { dialog,which ->
+            .setPositiveButton("Confirmer") { dialog,which ->
                 viewModel.deleteCandidat(candidat)
                 Toast.makeText(requireContext(), "Candidat supprimé", Toast.LENGTH_SHORT).show()
                 requireActivity().supportFragmentManager.popBackStack()
             }
-            .setNegativeButton("Non", null)
+            .setNegativeButton("Annuler", null)
             .show()
     }
 

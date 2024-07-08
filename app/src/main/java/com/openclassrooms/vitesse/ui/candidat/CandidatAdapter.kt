@@ -1,6 +1,7 @@
 package com.openclassrooms.vitesse.ui.candidat
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.openclassrooms.vitesse.R
 import com.openclassrooms.vitesse.domain.model.Candidat
 
@@ -75,16 +77,17 @@ class CandidatAdapter (private val onItemClicked: (Candidat) -> Unit) : ListAdap
             itemView.setOnClickListener { onItemClicked(candidat)} //l40 val onItemClicked: (Candidat) -> Unit }
 
                 val context = itemView.context
-                val resourceId = context.resources.getIdentifier(
-                    candidat.picture,
-                    "drawable",
-                    context.packageName
-                )
 
-                imageView.setImageResource(resourceId)
-
+            //glide to load the image
+                val picture = candidat.picture
+            if (picture.startsWith("content://") || picture.startsWith("file://")) {
+                Glide.with(context).load(Uri.parse(picture)).into(imageView)
+            } else {
+                val resourceId = context.resources.getIdentifier(picture, "drawable", context.packageName)
+                Glide.with(context).load(resourceId).into(imageView)
             }
 
+            }
 
         }
 
