@@ -111,5 +111,10 @@ class CandidatsFragment : Fragment() {
             allCandidats
         }
         adapter.submitList(filteredList) //update the adapter with the filtered list
+        checkEmptyList(filteredList)
+    }
+
+    private fun checkEmptyList(list: List<Candidat>) {
+        binding.noResultsCandidats.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
     }
 }
