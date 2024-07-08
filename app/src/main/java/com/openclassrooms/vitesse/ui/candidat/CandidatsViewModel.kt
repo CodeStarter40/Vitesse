@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.openclassrooms.vitesse.data.database.AppDatabase
 import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,15 +20,24 @@ class CandidatsViewModel @Inject constructor(private val db: AppDatabase) : View
     val candidats: LiveData<List<Candidat>>
         get() = _candidats
 
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
+
+
     init {
         loadCandidats()
     }
 
     private fun loadCandidats() {
-        viewModelScope.launch {
+        _loading.postValue(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
             db.candidatDao().getAllCandidat().collect { candidatsDto ->
                 val candidats = candidatsDto.map { Candidat.fromDto(it) }
                 _candidats.postValue(candidats)
+                _loading.postValue(false)
                 Log.d("CANDIDATSVIEWMODEL", "Loaded Candidats: ${candidats.size}")
             }
         }

@@ -75,6 +75,10 @@ class CandidatsFragment : Fragment() {
             adapter.submitList(candidats)
         })
 
+        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
+
         //init the searchview
         setupSearchView()
     }
@@ -101,7 +105,7 @@ class CandidatsFragment : Fragment() {
     private fun filterCandidats(query: String) {
         val filteredList = if (query.isNotEmpty()) {
             allCandidats.filter {
-                it.nom.contains(query, ignoreCase = true) || it.prenom.contains(query, ignoreCase = true) || it.note.contains(query, ignoreCase = true)
+                it.nom.contains(query, ignoreCase = true) || it.prenom.contains(query, ignoreCase = true)
             }
         } else {
             allCandidats

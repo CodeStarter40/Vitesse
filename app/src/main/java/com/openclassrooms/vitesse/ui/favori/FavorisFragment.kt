@@ -61,6 +61,10 @@ class FavorisFragment:Fragment() {
                 Log.d("FAVORISFRAGMENT", "Favoris on display: ${favoris.size}")
             }
             adapter.submitList(favoris)
-            })
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
     }
 }

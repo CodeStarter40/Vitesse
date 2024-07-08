@@ -106,7 +106,6 @@ class DetailCandidatFragment : Fragment() {
                         sendMailToCandidat(candidat.email)
                     }
                     //calcul age candidat
-
                     val age = calculateAge(candidat.dateBirth)
                     binding.ageaCalcule.text = "$age ans"
 
@@ -114,6 +113,7 @@ class DetailCandidatFragment : Fragment() {
                     binding.edit.setOnClickListener {
                         sendCandidatToEditFragment(candidat)
                     }
+                    //binding of salairePretend in pound
                     binding.textViewSalaireLSCalcule.text = "soit £ ${convertPretendToPound(candidat.pretend)}"
                 }
             }
