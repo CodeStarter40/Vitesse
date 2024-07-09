@@ -286,7 +286,7 @@ abstract class AppDatabase : RoomDatabase(){
                     phone = "4567890123",
                     email = "alice.perrin@test16.com",
                     picture = "@drawable/female44",
-                    dateBirth = "07-13-1990",
+                    dateBirth = "07-08-1990",
                     pretend = 61000.0,
                     favori = true,
                     note = "Morbi tincidunt, massa auctor ultricies pulvinar, nulla ante gravida sapien, at consequat libero mauris eget turpis.",
