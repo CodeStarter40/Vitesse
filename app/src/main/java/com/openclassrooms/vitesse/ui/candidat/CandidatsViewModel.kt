@@ -33,7 +33,7 @@ class CandidatsViewModel @Inject constructor(private val db: AppDatabase) : View
     private fun loadCandidats() {
         _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            delay(1000)
+            delay(500)
             db.candidatDao().getAllCandidat().collect { candidatsDto ->
                 val candidats = candidatsDto.map { Candidat.fromDto(it) }
                 _candidats.postValue(candidats)

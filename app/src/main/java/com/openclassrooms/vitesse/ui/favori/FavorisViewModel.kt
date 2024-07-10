@@ -33,7 +33,7 @@ class FavorisViewModel @Inject constructor(private val db: AppDatabase) : ViewMo
     private fun loadFavoris() {
         viewModelScope.launch(Dispatchers.IO) {
             _loading.postValue(true)
-            delay(1000)
+            delay(500)
             db.candidatDao().getFavoris().collect { candidatsDto ->
                 val favoris = candidatsDto.map { Candidat.fromDto(it) }
                 _favoris.postValue(favoris)
