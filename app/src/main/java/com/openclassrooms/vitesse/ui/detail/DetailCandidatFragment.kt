@@ -115,14 +115,21 @@ class DetailCandidatFragment : Fragment() {
                     binding.edit.setOnClickListener {
                         sendCandidatToEditFragment(candidat)
                     }
+
+                    /*
                     //binding of salairePretend in pound
                     binding.textViewSalaireLSCalcule.text = "soit £ ${convertPretendToPound(candidat.pretend)}"
+                    */
 
                     //binding note adapt
                     binding.textNotes.text = candidat.note
                 }
             }
         }
+        //observe convertedAmount and adapt textview
+        viewModel.convertedAmount.observe(viewLifecycleOwner) { formattedAmount ->
+            binding.textViewSalaireLSCalcule.text = "soit £ $formattedAmount"}
+
         applyElevationEffect(binding.toolbar)
         applyElevationEffect(binding.delete)
         applyElevationEffect(binding.favorite)
@@ -205,10 +212,12 @@ class DetailCandidatFragment : Fragment() {
         val currentDate = LocalDate.now()
         return Period.between(birthDate, currentDate).years
     }
+    /*
     //convert pretend euro to pound
     private fun convertPretendToPound(pretend: Double): Double {
         return pretend * 0.85
     }
+    */
 
 
     //send this candidat in to editfragment for update

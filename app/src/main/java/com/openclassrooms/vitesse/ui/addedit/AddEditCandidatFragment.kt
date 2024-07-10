@@ -95,7 +95,6 @@ class AddEditCandidatFragment : Fragment() {
             }
         }
     }
-
     //preLoadFields from candidat
     private fun preLoadFields(candidat: Candidat) {
         binding.inputPrenom.setText(candidat.prenom)
@@ -115,34 +114,6 @@ class AddEditCandidatFragment : Fragment() {
             }
         }
     }
-
-    /*
-    //abandonned function for this moment...
-    //check permission and open Gallery
-    private fun checkPermissionAndOpenGallery() {
-        when {
-            //check if permission is granted
-            ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
-                openGallery()
-                Log.d("ADDEDITCANDIDAT", "checkPermissionAndOpenGallery : PERMISSION GRANTED")
-            }
-            else -> {
-                //ask for the permission
-                requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                Log.d("ADDEDITCANDIDAT", "checkPermissionAndOpenGallery NO : requestPermissionLauncher : PERMISSION REQUESTED")
-            }
-        }
-    }
-
-    //val requestPermissionLauncher
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted : Boolean ->
-        if (isGranted) { openGallery()
-        } else {
-            Toast.makeText(requireContext(), "Permission refusée", Toast.LENGTH_SHORT).show()
-            Log.d("ADDEDITCANDIDAT", "RequestPermissionLauncher : PERMISSION REFUSED")
-        }
-    }*/
-
     //open gallery image
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
