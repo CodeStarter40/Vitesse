@@ -12,6 +12,7 @@ import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,8 +27,15 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase, p
     private val _convertedAmount = MutableLiveData<Double>()
     val convertedAmount: LiveData<Double> get() = _convertedAmount
 
+
+    //loading state
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
     fun getCandidat(id: Long) {
+        _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
+            delay(300)
             try {
                 val candidatDto = db.candidatDao().getCandidatById(id)
                 val candidat = candidatDto?.let { Candidat.fromDto(it) }
@@ -43,9 +51,11 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase, p
                     val formattedAmount = String.format("%.2f", convertedAmount).replace(",", ".").toDouble()
                     _convertedAmount.postValue(formattedAmount)
                     Log.d("DETAILCANDIDATVIEWMODEL", "convertSalaryToPounds called with amount: ${it.pretend}")
+                    _loading.postValue(false)
                 }
             } catch (e: Exception) {
                 Log.e("DETAILCANDIDATVIEWMODEL", "Error fetching candidat or converting currency: ${e.message}")
+                _loading.postValue(false)
             }
         }
     }

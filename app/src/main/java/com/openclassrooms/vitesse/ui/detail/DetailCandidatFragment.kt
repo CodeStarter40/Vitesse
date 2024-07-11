@@ -52,6 +52,14 @@ class DetailCandidatFragment : Fragment() {
             candidatId = it.getLong("candidatId")
         }
 
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+
         if (candidatId != -1L) {
             viewModel.getCandidat(candidatId)
             viewModel.candidat.observe(viewLifecycleOwner) { candidat ->
