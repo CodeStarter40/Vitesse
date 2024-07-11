@@ -97,13 +97,17 @@
                             android:id="@+id/icon_call"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            android:padding="5dp"
                             android:contentDescription="call"
-                            android:src="@drawable/icon_phone" />
+                            android:src="@drawable/icon_phone"
+                            android:background="@drawable/circle"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Appel"
+                            android:textSize="10dp"
+                            android:layout_marginTop="5dp"
                             android:gravity="center" />
 
                     </LinearLayout>
@@ -119,14 +123,18 @@
                             android:id="@+id/icon_sms"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            android:padding="5dp"
                             android:contentDescription="sms"
-                            android:src="@drawable/icon_sms" />
+                            android:src="@drawable/icon_sms"
+                            android:background="@drawable/circle"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SMS"
-                            android:gravity="center" />
+                            android:textSize="10dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"/>
 
                     </LinearLayout>
 
@@ -141,14 +149,18 @@
                             android:id="@+id/icon_email"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            android:padding="5dp"
                             android:contentDescription="email"
-                            android:src="@drawable/icon_mail" />
+                            android:src="@drawable/icon_mail"
+                            android:background="@drawable/circle"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="10dp"
                             android:text="E-mail"
-                            android:gravity="center" />
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"/>
 
                     </LinearLayout>
 
@@ -197,7 +209,7 @@
                             android:layout_marginTop="8dp"
                             android:paddingStart="10dp"
                             android:text="03/03/1989"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
                         <TextView
                             android:id="@+id/ageaCalcule"
                             android:layout_width="wrap_content"
@@ -205,7 +217,7 @@
                             android:layout_marginTop="8dp"
                             android:paddingStart="10dp"
                             android:text="(34 ans)"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -213,7 +225,7 @@
                             android:layout_marginTop="8dp"
                             android:paddingStart="10dp"
                             android:text="Anniversaire"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
