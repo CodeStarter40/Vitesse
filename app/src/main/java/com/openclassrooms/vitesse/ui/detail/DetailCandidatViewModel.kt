@@ -34,7 +34,7 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase, p
                 _candidat.postValue(candidat)
                 //convert salary to pounds if candidat is not null
                 candidat?.let {
-                    Log.d("DETAILCANDIDATVIEWMODEL", "Fetching conversion rate")
+                    Log.d("DETAILCANDIDATVIEWMODEL", "Fetching conversion rate, calling repository")
                     val rate = repository.convertEurosToPounds()
                     Log.d("DETAILCANDIDATVIEWMODEL", "Conversion rate fetched: $rate")
                     val convertedAmount = it.pretend * rate

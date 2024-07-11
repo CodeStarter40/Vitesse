@@ -19,7 +19,7 @@ class CurrencyRepository @Inject constructor() { private val api: CurrencyApiSer
             .baseUrl("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        Log.d("CURRENCYREPOSITORY", "init called")
+        Log.d("CURRENCYREPOSITORY", "init Retrofit called")
 
         api=retrofit.create(CurrencyApiService::class.java)
     }
@@ -28,6 +28,7 @@ class CurrencyRepository @Inject constructor() { private val api: CurrencyApiSer
         val response: Response<CurrencyRatesResponse>
         try {
             //call api for catch change rates
+            Log.d("CURRENCYREPOSITORY", "Calling API")
             response = api.getCurrencyRates()
             //verif http response code
             Log.d("CURRENCYREPOSITORY", "HTTP Response Code: ${response.code()}")
@@ -38,6 +39,7 @@ class CurrencyRepository @Inject constructor() { private val api: CurrencyApiSer
                 val rates = response.body()?.eur
                 //check if rates contains "gbp" key and not null
                 if (rates != null && rates.containsKey("gbp")) {
+                    Log.d("CURRENCYREPOSITORY", "Conversion rate found for GBP")
                     //return rate value
                     return rates["gbp"] ?: 0.0
                 } else {
