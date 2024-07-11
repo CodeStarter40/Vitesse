@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.openclassrooms.vitesse.data.database.AppDatabase
+import com.openclassrooms.vitesse.data.repository.CandidatsRepository
 import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CandidatsViewModel @Inject constructor(private val db: AppDatabase) : ViewModel() {
+class CandidatsViewModel @Inject constructor(private val candidatRepository: CandidatsRepository) : ViewModel() {
 
     private val _candidats = MutableLiveData<List<Candidat>>()
     val candidats: LiveData<List<Candidat>>
@@ -34,7 +35,7 @@ class CandidatsViewModel @Inject constructor(private val db: AppDatabase) : View
         _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
             delay(500)
-            db.candidatDao().getAllCandidat().collect { candidatsDto ->
+            candidatRepository.getAllCandidats().collect { candidatsDto ->
                 val candidats = candidatsDto.map { Candidat.fromDto(it) }
                 _candidats.postValue(candidats)
                 _loading.postValue(false)

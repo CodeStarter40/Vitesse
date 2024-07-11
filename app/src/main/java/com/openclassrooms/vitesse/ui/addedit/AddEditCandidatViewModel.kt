@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.openclassrooms.vitesse.data.database.AppDatabase
+import com.openclassrooms.vitesse.data.repository.CandidatsRepository
 import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddEditCandidatViewModel @Inject constructor(private val db: AppDatabase) : ViewModel() {
+class AddEditCandidatViewModel @Inject constructor(private val candidatRepository: CandidatsRepository) : ViewModel() {
 
     private val _candidat = MutableLiveData<Candidat?>()
     val candidat: LiveData<Candidat?>
@@ -22,33 +23,42 @@ class AddEditCandidatViewModel @Inject constructor(private val db: AppDatabase) 
     fun saveCandidat(candidat: Candidat) {
         viewModelScope.launch(Dispatchers.IO) {
             //pickup candidat from db with  candidat.id
-            val existingCandidat = db.candidatDao().getCandidatById(candidat.id)
+            val existingCandidat = candidatRepository.getCandidatById(candidat.id)
 
             //verification if the candidat already exists
             if (existingCandidat != null) {
                 //update candidat
-                db.candidatDao().updateCandidat(candidat.toDto())
+                candidatRepository.updateCandidat(candidat)
             } else {
                 //if not existe insert candidat in db
-                db.candidatDao().insertCandidat(candidat.toDto())
+                candidatRepository.insertCandidat(candidat)
             }
         }
     }
-
+    //get candidat by id
     fun getCandidat(id: Long): MutableLiveData<Candidat?> {
         viewModelScope.launch(Dispatchers.IO) {
-            val candidatDto = db.candidatDao().getCandidatById(id)
-            val candidat = candidatDto.let { Candidat.fromDto(it) }
-            _candidat.postValue(candidat)
+            //use repository to get candidat
+            val candidatDto = candidatRepository.getCandidatById(id)
+            //check if candidatDto is not null
+            if (candidatDto != null) {
+                //convert candidatDto to candidat
+                val candidat = Candidat.fromDto(candidatDto)
+                _candidat.postValue(candidat)
+            } else {
+                _candidat.postValue(null)
+            }
         }
         return _candidat
     }
 
-
+    /*
     //add function to update candidat
     fun updateCandidat(candidat: Candidat) {
         viewModelScope.launch {
             db.candidatDao().updateCandidat(candidat.toDto())
         }
     }
+
+     */
 }

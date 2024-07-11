@@ -11,17 +11,34 @@ import javax.inject.Singleton
 
 @Singleton
 class CandidatsRepository @Inject constructor(private val candidatDao: CandidatDtoDao) {
+    //get all candidat
     fun getAllCandidats(): Flow<List<CandidatDto>> {
         return candidatDao.getAllCandidat()
-    }
-
-    //add candidat
-    suspend fun addCandidat(candidat: Candidat) {
-        candidatDao.insertCandidat(candidat.toDto())
     }
 
     //delete candidatbyId
     suspend fun deleteCandidatById(id: Long){
         candidatDao.deleteCandidatById(id)
     }
+
+    //update candidat
+    suspend fun updateCandidat(candidat: Candidat) {
+        candidatDao.updateCandidat(candidat.toDto())
+    }
+
+    //get candidat by id
+    suspend fun getCandidatById(id: Long): CandidatDto? {
+        return candidatDao.getCandidatById(id)
+    }
+
+    //insert candidat
+    suspend fun insertCandidat(candidat: Candidat) {
+        candidatDao.insertCandidat(candidat.toDto())
+    }
+
+    //get favoris
+    fun getFavoris(): Flow<List<CandidatDto>> {
+        return candidatDao.getFavoris()
+    }
+
 }

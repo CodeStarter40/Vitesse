@@ -6,18 +6,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.openclassrooms.vitesse.data.database.AppDatabase
+import com.openclassrooms.vitesse.data.repository.CandidatsRepository
 import com.openclassrooms.vitesse.data.repository.CurrencyRepository
 import com.openclassrooms.vitesse.domain.model.Candidat
-import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase, private val repository: CurrencyRepository) : ViewModel() {
+class DetailCandidatViewModel @Inject constructor(private val currencyRepository: CurrencyRepository, private val candidatRepository: CandidatsRepository) : ViewModel() {
 
 
     private val _candidat = MutableLiveData<Candidat?>()
@@ -35,15 +33,14 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase, p
     fun getCandidat(id: Long) {
         _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            delay(300)
             try {
-                val candidatDto = db.candidatDao().getCandidatById(id)
+                val candidatDto = candidatRepository.getCandidatById(id)
                 val candidat = candidatDto?.let { Candidat.fromDto(it) }
                 _candidat.postValue(candidat)
                 //convert salary to pounds if candidat is not null
                 candidat?.let {
                     Log.d("DETAILCANDIDATVIEWMODEL", "Fetching conversion rate, calling repository")
-                    val rate = repository.convertEurosToPounds()
+                    val rate = currencyRepository.convertEurosToPounds()
                     Log.d("DETAILCANDIDATVIEWMODEL", "Conversion rate fetched: $rate")
                     val convertedAmount = it.pretend * rate
                     _convertedAmount.postValue(convertedAmount)
@@ -63,7 +60,7 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase, p
     fun toggleFavori(candidat: Candidat) {
         viewModelScope.launch(Dispatchers.IO) {
             candidat.favori = !candidat.favori
-            db.candidatDao().updateCandidat(candidat.toDto())
+            candidatRepository.updateCandidat(candidat)
             Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori UPDATE CANDIDAT")
             _candidat.postValue(candidat)
             Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori COMPLETED")
@@ -72,7 +69,7 @@ class DetailCandidatViewModel @Inject constructor(private val db: AppDatabase, p
 
     fun deleteCandidat(candidat: Candidat) {
         viewModelScope.launch(Dispatchers.IO) {
-            db.candidatDao().deleteCandidat(candidat.toDto())
+            candidatRepository.deleteCandidatById(candidat.id)
             Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat DELETE CANDIDAT")
             _candidat.postValue(null)
             Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat COMPLETED")
