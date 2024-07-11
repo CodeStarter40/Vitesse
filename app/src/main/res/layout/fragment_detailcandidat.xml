@@ -21,7 +21,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="#FFEEFF"
                 app:titleTextColor="@color/cardview_dark_background"
-                app:navigationIcon="@drawable/icon_arrowback"
+                app:navigationIcon="@drawable/arrowback_42"
                 app:title="Candidat TEST">
 
                 <ImageView

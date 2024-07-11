@@ -34,7 +34,7 @@ class CandidatsViewModel @Inject constructor(private val candidatRepository: Can
     private fun loadCandidats() {
         _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            delay(500)
+            delay(300)
             candidatRepository.getAllCandidats().collect { candidatsDto ->
                 val candidats = candidatsDto.map { Candidat.fromDto(it) }
                 _candidats.postValue(candidats)
