@@ -51,6 +51,7 @@ class AddEditCandidatFragment : Fragment() {
         if (candidatId != -1L) {
             viewModel.getCandidat(candidatId).observe(viewLifecycleOwner) { candidat ->
                 candidat?.let {
+                    existingCandidat = it //store existing candidat
                     preLoadFields(it)
                 }
             }
@@ -71,7 +72,7 @@ class AddEditCandidatFragment : Fragment() {
             val note = binding.inputNote.text.toString()
 
             if (prenom.isNotEmpty() && nom.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty() && dateBirth.isNotEmpty() && pretend.toString().isNotEmpty() && note.isNotEmpty()) {
-                val picture = selectedImageUri?.toString() ?: existingCandidat?.picture ?: "male29"
+                val picture = selectedImageUri?.toString() ?: existingCandidat?.picture ?: "addpicture"
                 val candidat = Candidat(
                     id = if (candidatId == -1L) 0 else candidatId,
                     prenom = prenom,

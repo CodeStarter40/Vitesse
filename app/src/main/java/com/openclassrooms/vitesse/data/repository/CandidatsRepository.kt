@@ -27,7 +27,7 @@ class CandidatsRepository @Inject constructor(private val candidatDao: CandidatD
     }
 
     //get candidat by id
-    suspend fun getCandidatById(id: Long): CandidatDto? {
+    fun getCandidatById(id: Long): CandidatDto {
         return candidatDao.getCandidatById(id)
     }
 

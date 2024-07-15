@@ -30,36 +30,51 @@
             android:padding="16dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                tools:ignore="ExtraText">
+                android:layout_height="match_parent"
+                android:padding="0dp"
+                android:visibility="visible"
+                tools:ignore="ExtraText"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="1dp">
 
                 <ImageView
                     android:id="@+id/inputImageProfilCandidat"
-                    android:layout_width="346dp"
-                    android:layout_height="157dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="291dp"
+                    android:layout_height="218dp"
+                    android:layout_marginTop="8dp"
                     android:contentDescription="Photo de profil"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/addpicture" />
+                    android:src="@drawable/addpicture"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageViewHuman"
-                    android:layout_width="30dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/icon_human" />
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/icon_human"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout30"
+                    app:layout_constraintEnd_toStartOf="@+id/textInputLayout30"
+                    app:layout_constraintHorizontal_bias="0.476"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout30" />
 
                 <com.google.android.material.textfield.TextInputLayout
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textInputLayout30"
+                    android:layout_width="262dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Prénom">
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Prénom"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inputImageProfilCandidat">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputPrenom"
@@ -70,11 +85,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textInputLayout31"
+                    android:layout_width="262dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint="Nom">
+                    android:layout_marginEnd="16dp"
+                    android:hint="Nom"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout30"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout30">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputNom"
@@ -87,17 +107,27 @@
 
                 <ImageView
                     android:id="@+id/imageViewPhone"
-                    android:layout_width="30dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/icon_phone" />
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/icon_phone"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout32"
+                    app:layout_constraintEnd_toStartOf="@+id/textInputLayout32"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout32" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textInputLayout32"
+                    android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Téléphone">
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Téléphone"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout31">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputPhone"
@@ -110,18 +140,29 @@
 
                 <ImageView
                     android:id="@+id/imageViewMail"
-                    android:layout_width="30dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/icon_mail" />
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/icon_mail"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout33"
+                    app:layout_constraintEnd_toStartOf="@+id/textInputLayout33"
+                    app:layout_constraintHorizontal_bias="0.49"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout33"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textInputLayout33"
+                    android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
                     android:hint="Email"
-                    app:endIconMode="clear_text">
+                    android:visibility="visible"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout32">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputEmail"
@@ -134,17 +175,26 @@
 
                 <ImageView
                     android:id="@+id/imageViewCalendar"
-                    android:layout_width="30dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/icon_calendar" />
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/icon_calendar"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout34"
+                    app:layout_constraintEnd_toStartOf="@+id/textInputLayout34"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout34" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textInputLayout34"
+                    android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint=" Date de naissance (DD-MM-YYYY)">
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint=" Date de naissance (DD-MM-YYYY)"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout33">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputBirthDate"
@@ -157,18 +207,25 @@
 
                 <ImageView
                     android:id="@+id/imageViewDollar"
-                    android:layout_width="30dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
                     android:contentDescription="dollar"
-                    app:srcCompat="@drawable/icon_dollar" />
+                    android:src="@drawable/icon_dollar"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout35"
+                    app:layout_constraintEnd_toStartOf="@+id/textInputLayout35"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout35" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textInputLayout35"
+                    android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Prétentions salariales">
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Prétentions salariales"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout34">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputSalarial"
@@ -181,17 +238,25 @@
 
                 <ImageView
                     android:id="@+id/imageViewNote"
-                    android:layout_width="30dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/icon_pen" />
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_pen"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout36"
+                    app:layout_constraintEnd_toStartOf="@+id/textInputLayout36"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout36" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textInputLayout36"
+                    android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Note">
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Note"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout35">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputNote"
@@ -206,12 +271,18 @@
                     android:id="@+id/buttonSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Sauvegarder"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
                     android:backgroundTint="#8a00c2"
-                    />
+                    android:text="Sauvegarder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout36" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
