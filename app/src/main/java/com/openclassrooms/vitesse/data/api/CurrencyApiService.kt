@@ -11,10 +11,3 @@ interface CurrencyApiService {
     suspend fun getCurrencyRates(): Response<CurrencyRatesResponse>
 }
 
-//data class to get currency rates
-data class CurrencyRatesResponse(
-    //reponse date in val date: String,
-    val date: String,
-    //reponse eur with rates changes on map
-    val eur: Map<String, Double>
-)

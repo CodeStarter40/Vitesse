@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -27,6 +28,7 @@ class CandidatsFragment : Fragment() {
     private val viewModel: CandidatsViewModel by viewModels()
     private lateinit var adapter: CandidatAdapter
     private var allCandidats: List<Candidat> = listOf()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +54,12 @@ class CandidatsFragment : Fragment() {
             val fragment = DetailCandidatFragment()
             fragment.arguments = bundle
             (activity as MainActivity).loadFragment(fragment)
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
         }
 
         //init the fab button

@@ -52,6 +52,12 @@ class FavorisFragment:Fragment() {
             (activity as MainActivity).loadFragment(fragment)
         }
 
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Log.e("FAVORISFRAGMENT", "Error message: $it")
+            }
+        }
+
         //set the layoutManager for the recyclerview
         binding.favorisRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.favorisRecyclerview.adapter = adapter

@@ -57,6 +57,12 @@ class AddEditCandidatFragment : Fragment() {
             }
         }
 
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+        }
+
         //binding imageProfilCandidat for execute checkPermissionAndOpenGallery L120
         binding.inputImageProfilCandidat.setOnClickListener {
             openGallery()

@@ -1,5 +1,6 @@
 package com.openclassrooms.vitesse.ui.addedit
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +19,10 @@ class AddEditCandidatViewModel @Inject constructor(private val candidatRepositor
     private val _candidat = MutableLiveData<Candidat?>()
     val candidat: LiveData<Candidat?>
         get() = _candidat
+
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?>
+        get() = _errorMessage
 
     //add function to save candidat
     fun saveCandidat(candidat: Candidat) {
@@ -38,16 +43,22 @@ class AddEditCandidatViewModel @Inject constructor(private val candidatRepositor
     //get candidat by id
     fun getCandidat(id: Long): MutableLiveData<Candidat?> {
         viewModelScope.launch(Dispatchers.IO) {
-            //use repository to get candidat
-            val candidatDto = candidatRepository.getCandidatById(id)
-            //check if candidatDto is not null
-            if (candidatDto != null) {
-                //convert candidatDto to candidat
-                val candidat = Candidat.fromDto(candidatDto)
-                _candidat.postValue(candidat)
-            } else {
-                _candidat.postValue(null)
-            }
+            try {
+                //use repository to get candidat
+                val candidatDto = candidatRepository.getCandidatById(id)
+                //check if candidatDto is not null
+                if (candidatDto != null) {
+                    //convert candidatDto to candidat
+                    val candidat = Candidat.fromDto(candidatDto)
+                    _candidat.postValue(candidat)
+                } else {
+                    _candidat.postValue(null)
+                    _errorMessage.postValue("Candidat non trouvé")
+                }
+            } catch (e: Exception) {
+                _errorMessage.postValue("Erreur lors de la récupération du candidat : ${e.message}")
+                Log.e("DETAILCANDIDATVIEWMODEL", "Erreur lors de la récupération du candidat : ${e.message}")
+                }
         }
         return _candidat
     }

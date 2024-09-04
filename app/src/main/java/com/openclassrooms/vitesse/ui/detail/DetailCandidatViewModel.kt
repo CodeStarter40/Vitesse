@@ -30,6 +30,10 @@ class DetailCandidatViewModel @Inject constructor(private val currencyRepository
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
+
     fun getCandidat(id: Long) {
         _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
@@ -43,15 +47,21 @@ class DetailCandidatViewModel @Inject constructor(private val currencyRepository
                     val rate = currencyRepository.convertEurosToPounds()
                     Log.d("DETAILCANDIDATVIEWMODEL", "Conversion rate fetched: $rate")
                     val convertedAmount = it.pretend * rate
-                    _convertedAmount.postValue(convertedAmount)
                     //conversion format with 2 decimal places, replace "," with "."
-                    val formattedAmount = String.format("%.2f", convertedAmount).replace(",", ".").toDouble()
+                    val formattedAmount =
+                        String.format("%.2f", convertedAmount).replace(",", ".").toDouble()
                     _convertedAmount.postValue(formattedAmount)
-                    Log.d("DETAILCANDIDATVIEWMODEL", "convertSalaryToPounds called with amount: ${it.pretend}")
+                    Log.d(
+                        "DETAILCANDIDATVIEWMODEL",
+                        "convertSalaryToPounds called with amount: ${it.pretend}"
+                    )
                     _loading.postValue(false)
                 }
             } catch (e: Exception) {
-                Log.e("DETAILCANDIDATVIEWMODEL", "Error fetching candidat or converting currency: ${e.message}")
+                Log.e(
+                    "DETAILCANDIDATVIEWMODEL",
+                    "Error fetching candidat or converting currency: ${e.message}"
+                )
                 _loading.postValue(false)
             }
         }
@@ -59,24 +69,38 @@ class DetailCandidatViewModel @Inject constructor(private val currencyRepository
 
     fun toggleFavori(candidat: Candidat) {
         viewModelScope.launch(Dispatchers.IO) {
-            candidat.favori = !candidat.favori
-            candidatRepository.updateCandidat(candidat)
-            Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori UPDATE CANDIDAT")
-            _candidat.postValue(candidat)
-            Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori COMPLETED")
+            try {
+                candidat.favori = !candidat.favori
+                candidatRepository.updateCandidat(candidat)
+                Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori UPDATE CANDIDAT")
+                _candidat.postValue(candidat)
+                Log.d("DETAILCANDIDATVIEWMODEL", "toggleFavori COMPLETED")
+            } catch (e: Exception) {
+                Log.e("DETAILCANDIDATVIEWMODEL", "Error updating candidat: ${e.message}")
+                //if error update, show toast
+                _errorMessage.postValue("Error updating candidat. Try again")
+            }
         }
     }
 
     fun deleteCandidat(candidat: Candidat) {
         viewModelScope.launch(Dispatchers.IO) {
-            candidatRepository.deleteCandidatById(candidat.id)
-            Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat DELETE CANDIDAT")
-            _candidat.postValue(null)
-            Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat COMPLETED")
+            try {
+                candidatRepository.deleteCandidatById(candidat.id)
+                Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat DELETE CANDIDAT")
+                _candidat.postValue(null)
+                Log.d("DETAILCANDIDATVIEWMODEL", "deleteCandidat COMPLETED")
+            } catch (e: Exception) {
+                Log.e("DETAILCANDIDATVIEWMODEL", "Error deleting candidat: ${e.message}")
+                //if error delete, show toast
+                _errorMessage.postValue("Error deleting candidat. Try again.")
+            }
+        }
+
+
+        fun modifyCandidat(candidat: Candidat) {
+            //WIP
         }
     }
-
-    fun modifyCandidat(candidat: Candidat) {
-        //WIP
-    }
 }
+

@@ -60,6 +60,12 @@ class DetailCandidatFragment : Fragment() {
             }
         }
 
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
+            }
+
         if (candidatId != -1L) {
             viewModel.getCandidat(candidatId)
             viewModel.candidat.observe(viewLifecycleOwner) { candidat ->

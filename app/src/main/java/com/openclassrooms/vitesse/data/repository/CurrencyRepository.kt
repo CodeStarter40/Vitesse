@@ -4,26 +4,13 @@ import android.util.Log
 import com.openclassrooms.vitesse.data.api.CurrencyApiService
 import com.openclassrooms.vitesse.data.api.CurrencyRatesResponse
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CurrencyRepository @Inject constructor() { private val api: CurrencyApiService
+class CurrencyRepository @Inject constructor(private val api: CurrencyApiService) {
 
 
-    //init retrofit
-    init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        Log.d("CURRENCYREPOSITORY", "init Retrofit called")
-
-        api=retrofit.create(CurrencyApiService::class.java)
-    }
-    //
     suspend fun convertEurosToPounds(): Double {
         val response: Response<CurrencyRatesResponse>
         try {

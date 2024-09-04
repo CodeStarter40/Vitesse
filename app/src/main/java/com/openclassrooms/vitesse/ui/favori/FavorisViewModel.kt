@@ -5,12 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.openclassrooms.vitesse.data.database.AppDatabase
 import com.openclassrooms.vitesse.data.repository.CandidatsRepository
 import com.openclassrooms.vitesse.domain.model.Candidat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,6 +25,11 @@ class FavorisViewModel @Inject constructor(private val candidatRepository: Candi
     val loading: LiveData<Boolean>
         get() = _loading
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?>
+        get() = _errorMessage
+
+
     init {
         loadFavoris()
     }
@@ -34,12 +37,17 @@ class FavorisViewModel @Inject constructor(private val candidatRepository: Candi
     private fun loadFavoris() {
         viewModelScope.launch(Dispatchers.IO) {
             _loading.postValue(true)
-            delay(300)
-            candidatRepository.getFavoris().collect { candidatsDto ->
-                val favoris = candidatsDto.map { Candidat.fromDto(it) }
-                _favoris.postValue(favoris)
+            try {
+                candidatRepository.getFavoris().collect { candidatsDto ->
+                    val favoris = candidatsDto.map { Candidat.fromDto(it) }
+                    _favoris.postValue(favoris)
+                    _loading.postValue(false)
+                    Log.d("FAVORISVIEWMODEL", "Loaded Favoris: ${favoris.size}")
+                }
+            } catch (e: Exception) {
+                Log.e("FAVORISVIEWMODEL", "Error loading Favoris")
+                _errorMessage.postValue("Error loading Favoris : ${e.message}")
                 _loading.postValue(false)
-                Log.d("FAVORISVIEWMODEL", "Loaded Favoris: ${favoris.size}")
             }
         }
     }

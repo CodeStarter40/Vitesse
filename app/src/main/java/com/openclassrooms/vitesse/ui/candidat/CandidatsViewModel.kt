@@ -26,6 +26,11 @@ class CandidatsViewModel @Inject constructor(private val candidatRepository: Can
     val loading: LiveData<Boolean>
         get() = _loading
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?>
+        get() = _errorMessage
+
+
 
     init {
         loadCandidats()
@@ -34,12 +39,17 @@ class CandidatsViewModel @Inject constructor(private val candidatRepository: Can
     private fun loadCandidats() {
         _loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            delay(300)
-            candidatRepository.getAllCandidats().collect { candidatsDto ->
-                val candidats = candidatsDto.map { Candidat.fromDto(it) }
-                _candidats.postValue(candidats)
+            try {
+                candidatRepository.getAllCandidats().collect { candidatsDto ->
+                    val candidats = candidatsDto.map { Candidat.fromDto(it) }
+                    _candidats.postValue(candidats)
+                    _loading.postValue(false)
+                    Log.d("CANDIDATSVIEWMODEL", "Loaded Candidats: ${candidats.size}")
+                }
+            } catch (e: Exception) {
+                Log.e("CANDIDATSVIEWMODEL", "Error loading Candidats")
+                _errorMessage.postValue("Error loading Candidats : ${e.message}")
                 _loading.postValue(false)
-                Log.d("CANDIDATSVIEWMODEL", "Loaded Candidats: ${candidats.size}")
             }
         }
     }
